@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 namespace War_Thunder_Scraper.classes
 {
-    class Func
+    class F
     {
         public static void Show(int value)
         {

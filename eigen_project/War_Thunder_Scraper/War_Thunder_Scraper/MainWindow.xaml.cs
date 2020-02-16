@@ -1,6 +1,4 @@
-﻿using HtmlAgilityPack;
-using Newtonsoft.Json.Linq;
-using ScrapySharp.Extensions;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -37,7 +35,8 @@ namespace War_Thunder_Scraper
             string correctJson = json.Replace("TAS, km/h", "tas");
             dynamic data = JObject.Parse(correctJson);
             Console.WriteLine(data.tas);
-            connection.writeToSerial(Convert.ToString(data.tas));
+            MessageBox.Show(Convert.ToString(data.tas));
+            //connection.writeToSerial(Convert.ToString(data.tas));
         }
 
         private void disconnectPort_Click(object sender, RoutedEventArgs e)

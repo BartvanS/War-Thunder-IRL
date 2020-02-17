@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 #include <Servo.h>
@@ -22,7 +23,9 @@ void loop()
     digitalWrite(2, HIGH);
     // Write all characters received with the serial port to the LCD.
     if (Serial.available() > 0) {
+      lcd.clear();
       String aircraftSpeedString = Serial.readString();
+      lcd.print(aircraftSpeedString);
       float aircraftSpeed = aircraftSpeedString.toInt();
       float degreesSpeedDouble = aircraftSpeed / 1000 * 180 ;
       lcd.print(degreesSpeedDouble);

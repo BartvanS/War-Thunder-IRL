@@ -28,9 +28,9 @@ void loop()
       lcd.print(aircraftSpeedString);
       float aircraftSpeed = aircraftSpeedString.toInt();
       float degreesSpeedDouble = aircraftSpeed / 1000 * 180 ;
-      lcd.print(degreesSpeedDouble);
+      // lcd.print(degreesSpeedDouble);
       int degreesSpeed = (int)degreesSpeedDouble;
-      servo.write(degreesSpeed);
+      // servo.write(degreesSpeed);
     }
   }
 }

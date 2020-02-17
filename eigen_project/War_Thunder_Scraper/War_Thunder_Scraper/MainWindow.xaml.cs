@@ -31,12 +31,13 @@ namespace War_Thunder_Scraper
         }
         private void startScraping_Click(object sender, RoutedEventArgs e)
         {
-            string json = new WebClient().DownloadString("http://127.0.0.1:8111/state");
-            string correctJson = json.Replace("TAS, km/h", "tas");
-            dynamic data = JObject.Parse(correctJson);
-            Console.WriteLine(data.tas);
-            MessageBox.Show(Convert.ToString(data.tas));
+            //string json = new WebClient().DownloadString("http://127.0.0.1:8111/state");
+            //string correctJson = json.Replace("TAS, km/h", "tas");
+            //dynamic data = JObject.Parse(correctJson);
+            //Console.WriteLine(data.tas);
+            //MessageBox.Show(Convert.ToString(data.tas));
             //connection.writeToSerial(Convert.ToString(data.tas));
+            connection.writeToSerial("$kaas");
         }
 
         private void disconnectPort_Click(object sender, RoutedEventArgs e)

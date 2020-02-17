@@ -35,9 +35,8 @@ namespace War_Thunder_Scraper.classes
         }
         public void writeToSerial(string value)
         {
-            //string parsedValue = "%" + value + "#";
-            Console.WriteLine(Convert.ToString(this.ReadTimeout) + " + " + Convert.ToString(this.WriteTimeout) + " + " + this.PortName + " + " + Convert.ToString(this.BaudRate));
-            Sp.Write(value);
+            string parsedValue = "%" + value + "#";
+            Sp.Write(parsedValue);
         }
 
         public void closePort()

@@ -16,9 +16,13 @@ namespace overige_opdrachten.classes
         public string Geboortedatum { get; set; }
         public List<Resultaat> Resultaten { get; set; }
 
-        public Student()
+        public Student(int studentnummer, string naam, string adres, string geboortedatum)
         {
-
+            this.Studentnummer = studentnummer;
+            Naam = naam;
+            Adres = adres;
+            Geboortedatum = geboortedatum;
+            Resultaten = new List<Resultaat>();
         }
 
         public int getGradePerClasscode(int vakCode)
@@ -33,7 +37,7 @@ namespace overige_opdrachten.classes
             return 0;
         }
 
-        public void addGrade(int vakCode, int grade, string name, int sbu)
+         public void addGrade(int vakCode, int grade, string name, int sbu)
         {
             bool excists = false;
             foreach (Resultaat item in Resultaten)
@@ -43,9 +47,9 @@ namespace overige_opdrachten.classes
                     if(item.Eindcijfer < grade)
                     {
                         item.Eindcijfer = grade;
-                        excists = true;
                         break;
                     }
+                    excists = true;
                 }
             }
             if (!excists)
@@ -81,6 +85,11 @@ namespace overige_opdrachten.classes
                 }
             }
             return sbuTotal;
+        }
+
+        public override string ToString()
+        {
+            return $"{Naam}, Geboortedatum: {Geboortedatum}, Adres: {Adres}";
         }
 
     }

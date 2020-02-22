@@ -49,11 +49,11 @@
     <Compile Include="classes\Resultaat.cs" />
     <Compile Include="classes\Student.cs" />
     <Compile Include="classes\Vak.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="StudentenRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="StudentenRegister.Designer.cs">
+      <DependentUpon>StudentenRegister.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +66,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StudentenRegister.resx">
+      <DependentUpon>StudentenRegister.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

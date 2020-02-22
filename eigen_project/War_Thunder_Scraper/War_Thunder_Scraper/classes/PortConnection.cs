@@ -33,6 +33,17 @@ namespace War_Thunder_Scraper.classes
             this.Sp.WriteTimeout = this.WriteTimeout;
             this.Sp.Open();
         }
+
+        //If the fields have been changed in this class you have to reopen de port. 
+        //This class handles this process.
+        public void changeConnection()
+        {
+            if (this.Sp.IsOpen)
+            {
+                this.Sp.Close();
+            }
+            this.Sp.Open();
+        }
         public void writeToSerial(string value)
         {
             string parsedValue = "%" + value + "#";

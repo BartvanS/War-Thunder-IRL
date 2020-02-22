@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 namespace War_Thunder_Scraper.classes
 {
-    class F
+    class Utils
     {
         public static void Show(int value)
         {
@@ -17,6 +17,5 @@ namespace War_Thunder_Scraper.classes
         {
             MessageBox.Show(value);
         }
-
     }
 }

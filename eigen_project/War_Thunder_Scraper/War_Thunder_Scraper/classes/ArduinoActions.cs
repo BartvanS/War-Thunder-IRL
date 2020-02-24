@@ -42,16 +42,16 @@ namespace War_Thunder_Scraper.classes
 
         }
 
-        public static void FetchData(PortConnection connection, bool keepFetching)
+        public static void FetchData(object connection, bool keepFetching)
         {
             while (keepFetching)
             {
-                //string json = new WebClient().DownloadString("http://127.0.0.1:8111/state");
-                //string correctJson = json.Replace("TAS, km/h", "tas");
-                //dynamic data = JObject.Parse(correctJson);
-                ////PortConnection connect = (PortConnection)connection;
+                string json = new WebClient().DownloadString("http://127.0.0.1:8111/state");
+                string correctJson = json.Replace("TAS, km/h", "tas");
+                dynamic data = JObject.Parse(correctJson);
+                PortConnection connect = (PortConnection)connection;
                 //connection.WriteToSerial(Convert.ToString(data.tas));
-                connection.WriteToSerial("kaas");
+                //connection.WriteToSerial("kaas");
                 Thread.Sleep(1000);
             }
         }

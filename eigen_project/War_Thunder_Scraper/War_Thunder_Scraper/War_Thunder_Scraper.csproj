@@ -80,6 +80,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="classes\ArduinoActions.cs" />
     <Compile Include="classes\Utils.cs" />
     <Compile Include="classes\PortConnection.cs" />
     <Compile Include="classes\State.cs" />

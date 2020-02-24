@@ -30,15 +30,15 @@ namespace War_Thunder_Scraper
                 availablePorts.Items.Add(port);
             }
         }
-        private void startScraping_Click(object sender, RoutedEventArgs e)
+
+        private void StartFetching_Click(object sender, RoutedEventArgs e)
         {
-            string json = new WebClient().DownloadString("http://127.0.0.1:8111/state");
-            string correctJson = json.Replace("TAS, km/h", "tas");
-            dynamic data = JObject.Parse(correctJson);
-            Console.WriteLine(data.tas);
-            MessageBox.Show(Convert.ToString(data.tas));
-            connection.writeToSerial(Convert.ToString(data.tas));
-            connection.writeToSerial("$kaas");
+            ArduinoActions.StartActions(connection);
+        }
+
+        private void StopFetching_Click(object sender, RoutedEventArgs e)
+        {
+            ArduinoActions.StopActions();
         }
 
         private void disconnectPort_Click(object sender, RoutedEventArgs e)
@@ -48,7 +48,6 @@ namespace War_Thunder_Scraper
                 connection.closePort();
             }
         }
-
 
         private void connectPort_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +62,5 @@ namespace War_Thunder_Scraper
                 connection = new PortConnection(portName, 9600, 500, 500);
             }
         }
-
-
     }
 }

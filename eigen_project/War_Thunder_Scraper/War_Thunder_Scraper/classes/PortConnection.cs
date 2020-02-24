@@ -44,7 +44,7 @@ namespace War_Thunder_Scraper.classes
             }
             this.Sp.Open();
         }
-        public void writeToSerial(string value)
+        public void WriteToSerial(string value)
         {
             string parsedValue = "%" + value + "#";
             Sp.Write(parsedValue);

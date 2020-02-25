@@ -1,10 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO.Ports;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using War_Thunder_Scraper.classes;
 
@@ -78,6 +73,17 @@ namespace War_Thunder_Scraper
                 connection = new PortConnection(portName, 9600, 500, 500);
                 connected = true;
             }
+        }
+
+        /// <summary>
+        /// Runs methods before application is completely closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RunCloseCheckups(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ArduinoActions.StopActions();
+            connection.closePort();
         }
     }
 }

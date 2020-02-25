@@ -14,35 +14,38 @@ namespace War_Thunder_Scraper.classes
     static class ArduinoActions
     {
         static Thread goFetchData;
+        static bool keepFetching;
         public static void StartActions(PortConnection connection)
         {
-            bool keepFetching = true;
-            GenerateThread(keepFetching, connection);
+            try
+            {
+                keepFetching = true;
+                GenerateThread(connection);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public static void StopActions()
         {
-            GenerateThread(false, null);
+            keepFetching = false;
+            goFetchData = null;
         }
 
-        private static void GenerateThread(bool keepFetching, PortConnection connection)
+        private static void GenerateThread(PortConnection connection)
         {
-            if (keepFetching)
-            {
                 goFetchData =
                 new Thread(
-                     unused => ArduinoActions.FetchData(connection, keepFetching)
+                     unused => ArduinoActions.FetchData(connection)
                 );
                 goFetchData.Start();
-            }
-            else
-            {
-                goFetchData = null;
-            }
-
         }
 
-        public static void FetchData(object connection, bool keepFetching)
+        public static void FetchData(object connection)
         {
             while (keepFetching)
             {
@@ -50,10 +53,17 @@ namespace War_Thunder_Scraper.classes
                 string correctJson = json.Replace("TAS, km/h", "tas");
                 dynamic data = JObject.Parse(correctJson);
                 PortConnection connect = (PortConnection)connection;
-                //connection.WriteToSerial(Convert.ToString(data.tas));
-                //connection.WriteToSerial("kaas");
-                Thread.Sleep(1000);
+                string tas = Convert.ToString(data.tas);
+                DumpEverywere(connect, tas);
+                Thread.Sleep(2000);
             }
+            Console.WriteLine("Stopped fetching");
+        }
+
+        public static void DumpEverywere(PortConnection connection, string value)
+        {
+            Console.WriteLine(value);
+            connection.WriteToSerial(value);
         }
     }
 }

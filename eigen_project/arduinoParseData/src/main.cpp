@@ -5,7 +5,7 @@
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 Servo servo;
 
-char serialChars
+char serialChars;
 void setup()
 {
   lcd.init();
@@ -23,8 +23,8 @@ void readSerial()
     lcd.clear();
     if (Serial.available() > 0)
     {
-      // String aircraftSpeedString = Serial.readString();
-      serialChars = Serial.read();
+      String aircraftSpeedString = Serial.readString();
+      // serialChars = Serial.read();
       
 
 

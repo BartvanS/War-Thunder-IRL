@@ -28,8 +28,7 @@ namespace War_Thunder_Scraper.classes
                 GenerateThread(connection);
             }
             catch (Exception)
-            {
-
+            { 
                 throw;
             }
 

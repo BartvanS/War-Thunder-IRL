@@ -16,15 +16,11 @@ namespace War_Thunder_Scraper
             InitializeComponent();
             setup();
         }
-        PortConnection connection;
+        PortConnection connection = null;
         bool connected = false;
         private void setup()
         {
-            string[] ports = SerialPort.GetPortNames();
-            foreach (string port in ports)
-            {
-                availablePorts.Items.Add(port);
-            }
+            UpdatePortList();
         }
 
         private void StartFetching_Click(object sender, RoutedEventArgs e)
@@ -59,13 +55,13 @@ namespace War_Thunder_Scraper
         
         private void connectPort_Click(object sender, RoutedEventArgs e)
         {
-            initializePort();
+            InitializePort();
         }
 
         /// <summary>
         /// Start the port connection
         /// </summary>
-        private void initializePort()
+        private void InitializePort()
         {
             if (availablePorts.HasItems)
             {
@@ -83,7 +79,25 @@ namespace War_Thunder_Scraper
         private void RunCloseCheckups(object sender, System.ComponentModel.CancelEventArgs e)
         {
             ArduinoActions.StopActions();
-            connection.closePort();
+            if (connection != null)
+            {
+                connection.closePort();
+            }
+        }
+
+        private void RefreshPorts_OnClick(object sender, RoutedEventArgs e)
+        {
+            UpdatePortList();
+        }
+
+        private void UpdatePortList()
+        {
+            string[] ports = SerialPort.GetPortNames();
+            availablePorts.Items.Clear();
+            foreach (string port in ports)
+            {
+                availablePorts.Items.Add(port);
+            }
         }
     }
 }

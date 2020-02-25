@@ -15,6 +15,13 @@ namespace War_Thunder_Scraper.classes
         public int ReadTimeout { get; set; }
         public int WriteTimeout { get; set; }
 
+        /// <summary>
+        ///  Set up the properties of the PortConnection class
+        /// </summary>
+        /// <param name="portName"></param>
+        /// <param name="baudRate"></param>
+        /// <param name="readTimeout"></param>
+        /// <param name="writeTimeout"></param>
         public PortConnection(string portName, int baudRate, int readTimeout, int writeTimeout)
         {
             this.Sp = new SerialPort();
@@ -25,17 +32,22 @@ namespace War_Thunder_Scraper.classes
             this.setupConnection();
         }
 
+        /// <summary>
+        /// Establish a new port connection
+        /// </summary>
         private void setupConnection()
         {
             this.Sp.PortName = this.PortName;
             this.Sp.BaudRate = this.BaudRate;
             this.Sp.ReadTimeout = this.ReadTimeout;
             this.Sp.WriteTimeout = this.WriteTimeout;
+            //this.Sp.Handshake = Handshake.XOnXOff;
             this.Sp.Open();
         }
 
-        //If the fields have been changed in this class you have to reopen de port. 
-        //This class handles this process.
+        /// <summary>
+        /// If the port properties have been changed in this class you have to reopen de port.
+        /// </summary>
         public void changeConnection()
         {
             if (this.Sp.IsOpen)
@@ -44,17 +56,25 @@ namespace War_Thunder_Scraper.classes
             }
             this.Sp.Open();
         }
+
+        /// <summary>
+        /// Write a string to the serialport
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteToSerial(string value)
         {
-            string parsedValue = "%" + value + "#";
-            Sp.Write(parsedValue);
+            //string parsedValue = "%" + value + "#";
+            //Sp.WriteLine(parsedValue);
+            Sp.WriteLine(value);
         }
 
+        /// <summary>
+        /// You need to close to port if you are not using it anymore
+        /// </summary>
         public void closePort()
         {
             Console.WriteLine("Port closed");
             Sp.Close();
         }
-
     }
 }

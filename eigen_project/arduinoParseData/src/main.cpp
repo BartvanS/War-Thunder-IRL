@@ -20,20 +20,21 @@ void readSerial()
 {
   if (Serial.available())
   {
-    lcd.clear();
+    
     if (Serial.available() > 0)
     {
+       
       String aircraftSpeedString = Serial.readString();
       // serialChars = Serial.read();
-      
-
-
-      lcd.print(aircraftSpeedString);
-      // float aircraftSpeed = aircraftSpeedString.toInt();
-      // float degreesSpeedDouble = aircraftSpeed / 1000 * 180 ;
-      // lcd.print(degreesSpeedDouble);
-      // int degreesSpeed = (int)degreesSpeedDouble;
-      // servo.write(degreesSpeed);
+      // lcd.print(aircraftSpeedString);
+      float aircraftSpeed = aircraftSpeedString.toInt();
+      // servo hoek = snelheid / (hoeveel km p u op de meter) * 180 graden
+      float degreesSpeedDouble = aircraftSpeed / 500 * 180 ;
+      lcd.clear();
+      Serial.println("test");
+      lcd.print(degreesSpeedDouble);
+      int degreesSpeed = (int)degreesSpeedDouble;
+      servo.write(degreesSpeed);
     }
   }
 }

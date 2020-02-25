@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:War_Thunder_Scraper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        >
     <Grid>
         <Button Name="startFetching" Content="Fetch" HorizontalAlignment="Left" Margin="145,104,0,0" VerticalAlignment="Top" Width="75" Click="StartFetching_Click"/>
         <Button Name="connectPort" Content="Connect port" HorizontalAlignment="Left" Margin="145,24,0,0" VerticalAlignment="Top" Width="75" Click="connectPort_Click" />

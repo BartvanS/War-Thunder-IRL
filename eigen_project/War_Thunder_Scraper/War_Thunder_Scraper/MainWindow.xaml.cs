@@ -67,6 +67,9 @@ namespace War_Thunder_Scraper
             initializePort();
         }
 
+        /// <summary>
+        /// Start the port connection
+        /// </summary>
         private void initializePort()
         {
             if (availablePorts.HasItems)

@@ -1,17 +1,12 @@
 #include <Arduino.h>
-// #include <LiquidCrystal_I2C.h>
 #include <Stepper.h>
 #include "calculateStepper.h"
 #include "readSerial.h"
 
-// LiquidCrystal_I2C lcd(0x27, 16, 2);
 Stepper stepper(STEPS, 8, 10, 9, 11);
 float MovingAverage = 0;
 void setup()
 {
-  // lcd.init();
-  // lcd.backlight();
-  // lcd.print("Starting...");
   Serial.begin(9600);
   stepper.setSpeed(4);
 }
@@ -24,9 +19,13 @@ void loop()
   {
     // lcd.clear();
     // lcd.print(buffer);
-    Serial.println("ACK");
-    // Serial.println("NACK"); //if something goes wrong send message to application
+    Serial.println("ACK"); //Send reply to WPF application Message has been received
     float stepsToMake = calculateStepsSpeedometer(buffer);
-    stepper.step(-stepsToMake); //rotate stepper counterclockwise as the stepper is positioned wronly
+    stepper.step(-stepsToMake);
   }
+  //todo: if something goes wrong send message to WPF application
+  // else if (messageAvailable == -1)
+  // {
+  // Serial.println("NACK");
+  // }
 }

@@ -8,13 +8,11 @@ typedef enum
 communicationState comState = WAITING_FOR_MESSAGE;
 #define MESSAGE_START ('#')
 #define MESSAGE_STOP ('%')
-// const int bufferLength = 32;
-//incomingmessage char array
-char incomingMessage[32];
+char incomingMessage[buffer_length];
 int i = 0;
 int readSerial(char *buf)
 {
-  buf[0] = '\0';  // lets clear the return c-string
+  buf[0] = '\0';  // lets clear the c-string
   int retval = 0; // we start with no errors and nothing to return
 
   // read the serial port buffer as long there are characters

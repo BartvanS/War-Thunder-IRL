@@ -14,8 +14,6 @@ namespace WarThunderScraper.classes
     {
         private Thread goFetchData;
         private bool keepFetching;
-        public StreamWriter fileWriter { get; set; }
-        public bool FillLogs { get; set; }
 
         public enum VehicleTypes
         {
@@ -50,10 +48,6 @@ namespace WarThunderScraper.classes
         {
             keepFetching = false;
             goFetchData = null;
-            if (fileWriter != null)
-            {
-                fileWriter.Close();
-            }
         }
 
         /// <summary>
@@ -100,10 +94,6 @@ namespace WarThunderScraper.classes
                         Console.WriteLine("No response from the arduino: " + e.Message);
                     }
 
-                    if (FillLogs)
-                    {
-                        fileWriter.WriteLine(vehicle.ToString());
-                    }
                 }
                 Thread.Sleep(500);
             }

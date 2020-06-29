@@ -1,5 +1,5 @@
 # War-Thunder-IRL
-This program retrieves data from your war thunder client and displays them fysically in real life!
+This program retrieves data from your war thunder client and displays them physically in real life!
 
 # Prerequisites
 ## Hardware
@@ -44,7 +44,13 @@ in .cpp to .ino and open this folder in the IDE. Some tinkering to make this wor
 For my own version I 3d printed [this speedometer](https://www.thingiverse.com/thing:3745020) 
 
 # Usage
+*Make sure you connected your arduino via usb or bluetooth*
+### Option 1: VS
 Once you opened the solution in VS, press f5 to start the application. Select the com port you think your arduino is connected to. 
+Start a flight and start the application
+
+### Option 2: Executable
+Dubble click the executable you downloaded from releases. Select the com port you think your arduino is connected to. 
 Start a flight and start the application
 
 **TADA!**

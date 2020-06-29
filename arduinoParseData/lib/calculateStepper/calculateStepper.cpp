@@ -4,12 +4,11 @@ float aircraftSpeed = 0;
 float previousSpeed = 0;
 float oldSteps = 0;
 
-float calculateStepsSpeedometer(char *buffer){
-      aircraftSpeed = atof(buffer);
+float calculateStepsSpeedometer(float aircraftSpeed){
       int maxSpeed = 1000;
       float newSteps = STEPS / (maxSpeed / aircraftSpeed);
       float stepsToMake = newSteps - oldSteps;
       previousSpeed = aircraftSpeed;
       oldSteps = newSteps;
-	  return stepsToMake;
+	return stepsToMake;
 }

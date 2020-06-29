@@ -3,5 +3,5 @@
 // #define STEPS 2038
 #define STEPS 2048
 
-float calculateStepsSpeedometer(char *buffer);
+float calculateStepsSpeedometer(float aircraftSpeed);
 #endif

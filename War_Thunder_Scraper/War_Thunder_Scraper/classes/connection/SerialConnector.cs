@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using War_Thunder_Scraper.classes.exceptions;
 using WarThunderScraper.classes.connection;
-using WarThunderScraper.classes.vehicles;
 
 namespace War_Thunder_Scraper.classes.connection
 {
     public class SerialConnector : IConnector
-
     {
         public SerialPort SP { get; set; }
-        public string PortName { get; set; }
-        public int BaudRate { get; set; }
-        public int ReadTimeout { get; set; }
-        public int WriteTimeout { get; set; }
+        private string PortName { get; set; }
+        private int BaudRate { get; set; }
+        private int ReadTimeout { get; set; }
+        private int WriteTimeout { get; set; }
         public bool Connected { get; set; }
 
         public SerialConnector()
@@ -40,24 +34,13 @@ namespace War_Thunder_Scraper.classes.connection
         /// <param name="writeTimeout"></param>
         public SerialConnector(string portName, int baudRate, int readTimeout, int writeTimeout)
         {
-            if (portName == null)
-            {
-                throw new ArgumentNullException();
-            }
             SP = new SerialPort();
-            PortName = portName;
+            PortName = portName ?? throw new ArgumentNullException();
             BaudRate = baudRate;
             ReadTimeout = readTimeout;
             WriteTimeout = writeTimeout;
             Connected = false;
-            try
-            {
-                OpenPort();
-            }
-            catch (UnauthorizedAccessException e)
-            {
-                Console.WriteLine("Port al geopend: " +e);
-            }
+            OpenPort();
         }
 
         /// <summary>
@@ -69,20 +52,16 @@ namespace War_Thunder_Scraper.classes.connection
             SP.BaudRate = this.BaudRate;
             SP.ReadTimeout = this.ReadTimeout;
             SP.WriteTimeout = this.WriteTimeout;
-            SP.Open();
-            Connected = true;   
-        }
-
-        /// <summary>
-        /// If the port properties have been changed in this class you have to reopen de port.
-        /// </summary>
-        public void ChangeConnection()
-        {
-            if (SP.IsOpen)
+            try
             {
-                ClosePort();
+                SP.Open();
             }
-            SP.Open();
+            catch (UnauthorizedAccessException e)
+            {
+                Console.WriteLine("Port is already opened: " + e);
+            }
+
+            Connected = true;
         }
 
         /// <summary>
@@ -90,22 +69,27 @@ namespace War_Thunder_Scraper.classes.connection
         /// </summary>
         /// <param name="value"></param>
         /// <exception cref="ProtocolException"></exception>
-        public bool Write(string value)
+        public bool Write(string valueType, string value)
         {
             if (!Connected)
             {
                 return false;
             }
-            SP.Write("#" + value + "%"); // start with # and end with % comform to the agreed protocol
+
+            string startMessage = "#";
+            string splitMessage = "@";
+            string endMessage = "%";
+            SP.Write(startMessage + valueType + splitMessage + value + endMessage); // start with # and end with % conform to the agreed protocol
             string response = "";
             try
             {
-                response = SP.ReadLine(); //\r
-                }
+                response = SP.ReadLine(); 
+            }
             catch (IOException e)
             {
                 Console.WriteLine("something something no connection arduino: " + e);
             }
+
             response = response.Replace("\n", string.Empty);
             response = response.Replace("\r", string.Empty);
             response = response.Replace("\t", string.Empty);
@@ -113,19 +97,27 @@ namespace War_Thunder_Scraper.classes.connection
             {
                 throw new ProtocolException("Error on the arduino side.");
             }
+
             Console.WriteLine(response);
             return true;
         }
 
-        /// <summary>
+        /// <summary>   
         /// You need to close to port if you are not using it anymore
         /// </summary>
         public void ClosePort()
         {
             if (Connected)
             {
-                Connected = false;
-                SP.Close();
+                try
+                {
+                    Connected = false;
+                    SP.Close();
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine("something something IOException");
+                }
             }
         }
     }

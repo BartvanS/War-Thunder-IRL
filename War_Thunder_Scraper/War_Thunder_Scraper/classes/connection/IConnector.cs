@@ -11,8 +11,7 @@ namespace WarThunderScraper.classes.connection
     {
         void OpenPort();
         void ClosePort();
-        void ChangeConnection();
-        bool Write(string value);
+        bool Write(string valueType, string value);
         bool Connected { get; set; }
 
     }

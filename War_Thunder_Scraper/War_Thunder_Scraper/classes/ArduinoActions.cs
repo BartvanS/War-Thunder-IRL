@@ -87,13 +87,12 @@ namespace WarThunderScraper.classes
                 {
                     try
                     {
-                        connection.Write(Convert.ToString(vehicle.Speed));
+                        connection.Write("speed", Convert.ToString(vehicle.Speed));
                     }
                     catch (TimeoutException e)
                     {
                         Console.WriteLine("No response from the arduino: " + e.Message);
                     }
-
                 }
                 Thread.Sleep(500);
             }

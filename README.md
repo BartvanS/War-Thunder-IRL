@@ -6,7 +6,8 @@ This program retrieves data from your war thunder client and displays them physi
  - Arduino uno 
     - Other arduino compatable boards will probably work too, may need some tinkering in the code for using the correct pins.
  - Jumper wires
- - Servo(s)
+ - stepper(s)
+ - For more then 1 stepper, you need an external powersupply
  
  ## Mentality
   - This is my first open source project, so please be kind. 😊

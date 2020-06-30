@@ -4,8 +4,6 @@
 #define STEPS 2048
 #define MAX_AMOUNT_METERS 50
 
-float calculateStepsSpeedometer(float aircraftSpeed);
-float calculateStepsHeight(float flyingHeight);
-void setupCalculator();
-float calculateSteps(float value, int index);
+float calculateSteps(float value, float maxValue, float *previousValue,  float *oldSteps);
+
 #endif

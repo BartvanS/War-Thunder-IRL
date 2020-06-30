@@ -14,6 +14,7 @@ namespace WarThunderScraper.classes
     {
         private Thread goFetchData;
         private bool keepFetching;
+        private readonly WebClient webclient = new WebClient();
 
         public enum VehicleTypes
         {
@@ -100,16 +101,16 @@ namespace WarThunderScraper.classes
         }
 
         /// <summary>
-        /// Fetches the json string from the given url and writes it to the serial
+        /// Fetches the json string from the given url and returns a vehicle object
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="vehicleType"></param>
+        /// <param name="vehicle"></param>
         private Vehicle FetchData(string url, Vehicle vehicle)
         {
             string json = "";
             try
             {
-                json = new WebClient().DownloadString(url);
+                json = webclient.DownloadString(url);
             }
             catch (WebException e)
             {
@@ -119,18 +120,19 @@ namespace WarThunderScraper.classes
 
 
             string correctJson = json.Replace("TAS, km/h", "tas");
+            correctJson = correctJson.Replace("H, m", "height");
             dynamic data = JObject.Parse(correctJson);
 
             if (vehicle is Plane)
             {
                 int tas = 0;
+                int height = 0;
                 tas = Convert.ToInt16(data.tas);
+                height = Convert.ToInt16(data.height);
                 Plane plane = vehicle as Plane;
                 Random randomNr = new Random();
-                plane.FlyingHeight =
-                    randomNr.Next(0, 3000); //random because turns out, the api dont support these values
+                plane.FlyingHeight = height;
                 plane.Speed = tas;
-                plane.FuelLeft = randomNr.Next(0, 100);
                 vehicle = (Vehicle) plane;
             }
 

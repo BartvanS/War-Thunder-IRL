@@ -35,7 +35,7 @@ namespace War_Thunder_Scraper.classes.connection
         public SerialConnector(string portName, int baudRate, int readTimeout, int writeTimeout)
         {
             SP = new SerialPort();
-            PortName = portName ?? throw new ArgumentNullException();
+            PortName = portName ?? throw new ArgumentNullException(nameof(portName));
             BaudRate = baudRate;
             ReadTimeout = readTimeout;
             WriteTimeout = writeTimeout;
@@ -116,7 +116,7 @@ namespace War_Thunder_Scraper.classes.connection
                 }
                 catch (IOException e)
                 {
-                    Console.WriteLine("something something IOException");
+                    Console.WriteLine("something something IOException: " + e);
                 }
             }
         }

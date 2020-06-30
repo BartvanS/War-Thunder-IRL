@@ -4,6 +4,7 @@
 #include <unity.h>
 #include "calculateStepper.h"
 #include "processValues.h"
+
 //for more info about arduino unit tests: https://docs.platformio.org/en/latest/plus/unit-testing.html#api 
 Stepper stepper(STEPS, 8, 10, 9, 11);
 
@@ -50,7 +51,7 @@ void test_process_value_speed()
     processValue(valueType, speed);
     delay(2000); //todo: if above serial input system works, implement here for if the correct dial moved
     char speed2[] = "-250";
-    processValue(valueType, speed2)
+    processValue(valueType, speed2);
 }
 
 void setup()

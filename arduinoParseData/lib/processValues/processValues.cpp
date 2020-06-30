@@ -3,11 +3,12 @@
 #include "processValues.h"
 #include "calculateStepper.h"
 Stepper stepper(STEPS, 8, 10, 9, 11);
-
 void setupStepper()
 {
   stepper.setSpeed(4);
+  setupCalculator();
 }
+
 void splitTokens(char *buffer, char *valueType, char *value){
    char splitToken[2] = "@";
     char *token = strtok(buffer, splitToken);

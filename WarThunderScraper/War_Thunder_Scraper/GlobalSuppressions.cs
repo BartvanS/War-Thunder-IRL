@@ -6,4 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:War_Thunder_Scraper.classes.connection.SerialConnector.Write(System.String,System.String)~System.Boolean")]
-[assembly: SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:WarThunderScraper.classes.ArduinoActions.ProcessData(WarThunderScraper.classes.connection.IConnector,System.String,WarThunderScraper.classes.ArduinoActions.VehicleTypes)")]
+[assembly: SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "member", Target = "~M:WarThunderScraper.classes.ArduinoActions.ProcessData(WarThunderScraper.classes.connection.IConnector,System.String,WarThunderScraper.classes.ArduinoActions.VehicleType)")]

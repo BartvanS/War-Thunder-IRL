@@ -12,11 +12,11 @@ namespace WarThunderScraper.classes
 {
     public class ArduinoActions
     {
-        private Thread goFetchData;
-        private bool keepFetching;
-        private readonly WebClient webclient = new WebClient();
+        private Thread _goFetchData;
+        private bool _keepFetching;
+        private readonly WebClient _webclient = new WebClient();
 
-        public enum VehicleTypes
+        public enum VehicleType
         {
             LandVehicle,
             Plane
@@ -24,7 +24,7 @@ namespace WarThunderScraper.classes
 
         public ArduinoActions()
         {
-            keepFetching = false;
+            _keepFetching = false;
         }
 
         /// <summary>
@@ -32,13 +32,13 @@ namespace WarThunderScraper.classes
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="vehicleType"></param>
-        public void StartActions(IConnector connection, VehicleTypes vehicleType)
+        public void StartActions(IConnector connection, VehicleType vehicleType)
         {
             if (connection == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("connection");
             }
-            keepFetching = true;
+            _keepFetching = true;
             GenerateThread(connection, vehicleType);
         }
 
@@ -47,31 +47,31 @@ namespace WarThunderScraper.classes
         /// </summary>
         public void StopActions()
         {
-            keepFetching = false;
-            goFetchData = null;
+            _keepFetching = false;
+            _goFetchData = null;
         }
 
         /// <summary>
         /// Generates a background task via a thread to fetch the data
         /// </summary>
         /// <param name="connection"></param>
-        private void GenerateThread(IConnector connection, VehicleTypes vehicleType)
+        private void GenerateThread(IConnector connection, VehicleType vehicleType)
         {
-            goFetchData =
+            _goFetchData =
                 new Thread(
                     unused => ProcessData(connection, "http://127.0.0.1:8111/state", vehicleType)
                 );
-            goFetchData.Start();
+            _goFetchData.Start();
         }
 
-        private void ProcessData(IConnector connection, string url, VehicleTypes vehicleType)
+        private void ProcessData(IConnector connection, string url, VehicleType vehicleType)
         {
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException("API url is not filled in");
             }
             Vehicle vehicle;
-            if (vehicleType == VehicleTypes.Plane)
+            if (vehicleType == VehicleType.Plane)
             {
                 vehicle = new Plane();
             }
@@ -81,7 +81,7 @@ namespace WarThunderScraper.classes
                 vehicle = new Plane();
             }
 
-            while (keepFetching)
+            while (_keepFetching)
             {
                 Vehicle vehicleData = FetchData(url, vehicle);
                 if (vehicleData != null)
@@ -112,15 +112,13 @@ namespace WarThunderScraper.classes
             string json = "";
             try
             {
-                json = webclient.DownloadString(url);
+                json = _webclient.DownloadString(url);
             }
             catch (WebException e)
             {
                 Console.WriteLine(e);
                 return null;
             }
-
-
             string correctJson = json.Replace("TAS, km/h", "tas");
             correctJson = correctJson.Replace("H, m", "height");
             dynamic data = JObject.Parse(correctJson);

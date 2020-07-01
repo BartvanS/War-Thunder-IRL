@@ -13,7 +13,7 @@ namespace WT_T
         public void TestStartActionsEmptyParameters()
         {
             ArduinoActions arduinoActions = new ArduinoActions();
-            arduinoActions.StartActions(null, ArduinoActions.VehicleTypes.LandVehicle);
+            arduinoActions.StartActions(null, ArduinoActions.VehicleType.LandVehicle);
         }
     }
 }

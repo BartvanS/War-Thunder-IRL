@@ -45,8 +45,8 @@ namespace WarThunderScraper
             string SelectedVehicleString = VehicleTypeSelectBox.SelectedItem.ToString();
             try
             {
-                Enum.TryParse(SelectedVehicleString, out ArduinoActions.VehicleTypes vehicleType);
-                if (vehicleType != null)
+                bool parseSuccess = Enum.TryParse(SelectedVehicleString, out ArduinoActions.VehicleType vehicleType);
+                if (parseSuccess)
                 {
                     arduinoActions.StartActions(_connection, vehicleType);
                 }

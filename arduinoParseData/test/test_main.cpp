@@ -6,7 +6,7 @@
 #include "processValues.h"
 
 //for more info about arduino unit tests: https://docs.platformio.org/en/latest/plus/unit-testing.html#api 
-Stepper stepper(STEPS, 8, 10, 9, 11);
+Stepper speedStepper(STEPS, 8, 10, 9, 11);
 
 // void setUp(void) {
 // // set stuff up here
@@ -31,7 +31,7 @@ void test_calculate_stepper_speed()
 {
     float speed = 250;
     float stepsToMake = calculateStepsSpeedometer(speed);
-    stepper.step(-stepsToMake); //if calculated correctly the pointer changes 45 degrees
+    speedStepper.step(-stepsToMake); //if calculated correctly the pointer changes 45 degrees
     Serial.println("Type 1 in the serial monitor if succesfull or above 1 when unsuccessfull");
     while (Serial.parseInt() == 0)
     {
@@ -41,7 +41,7 @@ void test_calculate_stepper_speed()
             TEST_ASSERT_EQUAL_INT(1, incomingByte);
         }
     }
-    stepper.step(stepsToMake);
+    speedStepper.step(stepsToMake);
 }
 
 void test_process_value_speed()
@@ -60,7 +60,7 @@ void setup()
     // if board doesn't support software reset via Serial.DTR/RTS
     delay(2000);
     UNITY_BEGIN(); // IMPORTANT LINE!
-    stepper.setSpeed(4);
+    speedStepper.setSpeed(4);
     //Physical tests
     RUN_TEST(test_calculate_stepper_speed);
     RUN_TEST(test_process_value_speed);

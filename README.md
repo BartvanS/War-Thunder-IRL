@@ -32,7 +32,7 @@ When installed open the solution by double clicking on "WarThunderScraper.sln" i
 ### Option 1: using VSC (Recommended)
 If you are using Visual Studio Code, you can use the extention "platform.io". Using this extention you can instantly
  upload the code to the arduino(Default set do arduino uno, change this in file "platformio.ini" if neccecery).
- [More info](https://docs.platformio.org/en/latest/integration/ide/vscode.html#quick-start)
+ [More info](https://docs.platformio.org/en/latest/integration/ide/vscode.html#platformio-toolbar)
   
 ### Option 2: using Arduino ide
 If you don't want to use the platform.io extention you can resort to using the [Arduino IDE](https://www.arduino.cc/en/Main/Software).

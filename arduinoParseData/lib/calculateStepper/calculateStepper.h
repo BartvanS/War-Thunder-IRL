@@ -1,6 +1,5 @@
 #ifndef CALCULATE_STEPPER
 #define CALCULATE_STEPPER
-// #define STEPS 2038
 #define STEPS 2048
 #define MAX_AMOUNT_METERS 50
 

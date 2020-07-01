@@ -88,7 +88,9 @@ namespace WarThunderScraper.classes
                 {
                     try
                     {
-                        connection.Write("speed", Convert.ToString(vehicle.Speed));
+                        Plane plane = vehicleData as Plane;
+                        connection.Write("speed", Convert.ToString(plane.Speed));
+                        connection.Write("height", Convert.ToString(plane.FlyingHeight));
                     }
                     catch (TimeoutException e)
                     {

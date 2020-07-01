@@ -79,7 +79,8 @@ namespace War_Thunder_Scraper.classes.connection
             string startMessage = "#";
             string splitMessage = "@";
             string endMessage = "%";
-            SP.Write(startMessage + valueType + splitMessage + value + endMessage); // start with # and end with % conform to the agreed protocol
+            string protocolMessage = startMessage + valueType + splitMessage + value + endMessage; // start with #, split with @ and end with % conform to the agreed protocol
+            SP.Write(protocolMessage);
             string response = "";
             try
             {

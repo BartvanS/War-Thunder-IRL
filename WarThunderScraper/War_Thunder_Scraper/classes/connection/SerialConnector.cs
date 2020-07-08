@@ -80,7 +80,14 @@ namespace War_Thunder_Scraper.classes.connection
             string splitMessage = "@";
             string endMessage = "%";
             string protocolMessage = startMessage + valueType + splitMessage + value + endMessage; // start with #, split with @ and end with % conform to the agreed protocol
-            SP.Write(protocolMessage);
+            try
+            {
+                SP.Write(protocolMessage);
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e);
+            }
             string response = "";
             try
             {

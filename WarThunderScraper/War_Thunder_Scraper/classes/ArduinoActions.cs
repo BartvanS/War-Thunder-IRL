@@ -32,14 +32,15 @@ namespace WarThunderScraper.classes
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="vehicleType"></param>
-        public void StartActions(IConnector connection, VehicleType vehicleType)
+        public void StartActions(IConnector connection, VehicleSettings vehicleSettings)
         {
             if (connection == null)
             {
                 throw new ArgumentNullException("connection");
             }
+
             _keepFetching = true;
-            GenerateThread(connection, vehicleType);
+            GenerateThread(connection, vehicleSettings);
         }
 
         /// <summary>
@@ -55,51 +56,82 @@ namespace WarThunderScraper.classes
         /// Generates a background task via a thread to fetch the data
         /// </summary>
         /// <param name="connection"></param>
-        private void GenerateThread(IConnector connection, VehicleType vehicleType)
+        private void GenerateThread(IConnector connection, VehicleSettings vehicleSettings)
         {
             _goFetchData =
                 new Thread(
-                    unused => ProcessData(connection, "http://127.0.0.1:8111/state", vehicleType)
+                    unused => ProcessData(connection, "http://127.0.0.1:8111/state", vehicleSettings)
                 );
             _goFetchData.Start();
         }
 
-        private void ProcessData(IConnector connection, string url, VehicleType vehicleType)
+        private void ProcessData(IConnector connection, string url, VehicleSettings vehicleSettings)
         {
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException("API url is not filled in");
             }
+
             Vehicle vehicle;
-            if (vehicleType == VehicleType.Plane)
+            if (vehicleSettings.VehicleType == VehicleType.Plane)
             {
                 vehicle = new Plane();
             }
-            else
+            else //if()
             {
                 //TODO: if there are other vehicletypes, add those
                 vehicle = new Plane();
             }
 
+
             while (_keepFetching)
             {
-                Vehicle vehicleData = FetchData(url, vehicle);
+                Vehicle vehicleData;
+                if (vehicleSettings.UseTestData)
+                {
+                    vehicleData = FetchTestData();
+                    Console.WriteLine(vehicleData.Speed);
+                }
+                else
+                {
+                    vehicleData = FetchData(url, vehicle);
+                }
+
                 if (vehicleData != null)
                 {
                     try
                     {
                         Plane plane = vehicleData as Plane;
-                        connection.Write("speed", Convert.ToString(plane.Speed));
-                        connection.Write("height", Convert.ToString(plane.FlyingHeight));
+                        if (vehicleSettings.RetrieveSpeed)
+                        {
+                            connection.Write("speed", Convert.ToString(plane.Speed));
+                        }
+
+                        if (vehicleSettings.RetrieveHeight)
+                        {
+                            connection.Write("height", Convert.ToString(plane.FlyingHeight));
+                        }
                     }
                     catch (TimeoutException e)
                     {
                         Console.WriteLine("No response from the arduino: " + e.Message);
                     }
                 }
+
                 Thread.Sleep(500);
             }
+
             Console.WriteLine("Stopped fetching");
+        }
+
+        private Vehicle FetchTestData()
+        {
+            Plane vehicle = new Plane();
+            Random r = new Random();
+            vehicle.FuelLeft = r.Next(100, 1000);
+            vehicle.Speed = r.Next(300, 500);
+            vehicle.FlyingHeight = r.Next(2000, 3000);
+            return vehicle;
         }
 
         /// <summary>
@@ -119,6 +151,7 @@ namespace WarThunderScraper.classes
                 Console.WriteLine(e);
                 return null;
             }
+
             string correctJson = json.Replace("TAS, km/h", "tas");
             correctJson = correctJson.Replace("H, m", "height");
             dynamic data = JObject.Parse(correctJson);
@@ -130,7 +163,6 @@ namespace WarThunderScraper.classes
                 tas = Convert.ToInt16(data.tas);
                 height = Convert.ToInt16(data.height);
                 Plane plane = vehicle as Plane;
-                Random randomNr = new Random();
                 plane.FlyingHeight = height;
                 plane.Speed = tas;
                 vehicle = (Vehicle) plane;

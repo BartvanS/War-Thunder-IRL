@@ -29,13 +29,12 @@ namespace War_Thunder_Scraper.classes
         public VehicleSettings()
         {
         }
-
-        public VehicleSettings(bool retrieveSpeed, bool retrieveHeight, bool useTestData, ArduinoActions.VehicleType vehicleType)
-        {
-            RetrieveSpeed = retrieveSpeed;
-            RetrieveHeight = retrieveHeight;
-            UseTestData = useTestData;
-            VehicleType = vehicleType;
-        }
+        // public void SetVehicleSettings(bool retrieveSpeed, bool retrieveHeight, bool useTestData, ArduinoActions.VehicleType vehicleType)
+        // {
+        //     RetrieveSpeed = retrieveSpeed;
+        //     RetrieveHeight = retrieveHeight;
+        //     UseTestData = useTestData;
+        //     VehicleType = vehicleType;
+        // }
     }
 }

@@ -18,11 +18,6 @@ namespace WarThunderScraper.classes.vehicles
         }
         public Vehicle(int speed, double fuelLeft)
         {
-            //Numbers cannot be null
-            // if (speed == null || fuelLeft == null)
-            // {
-            //     throw new ArgumentNullException();
-            // }
             Speed = speed;
             FuelLeft = fuelLeft;
         }

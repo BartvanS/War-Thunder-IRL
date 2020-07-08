@@ -18,11 +18,6 @@ namespace WarThunderScraper.classes.vehicles
         }
         public Plane(int speed, double fuelLeft, int flyingHeight) : base(speed, fuelLeft)
         {
-            //Numbers cannot be null
-            // if (speed == null || fuelLeft == null || flyingHeight == null)
-            // {
-            //     throw new ArgumentNullException();
-            // }
             FlyingHeight = flyingHeight;
         }
 

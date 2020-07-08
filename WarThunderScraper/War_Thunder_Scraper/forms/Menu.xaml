@@ -14,11 +14,12 @@
         <Button Name="RefreshPorts" Content="Refresh ports" HorizontalAlignment="Left" Margin="41,124,0,0" VerticalAlignment="Top" Width="100" Click="RefreshPorts_OnClick"/>
         <ListBox Name="VehicleTypeSelectBox" HorizontalAlignment="Left" Height="100" Margin="156,45,0,0" VerticalAlignment="Top" Width="100"/>
         <Label Content="Type of vehicle" HorizontalAlignment="Left" Margin="156,19,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="RetrieveAllValuesCheckBox" Content="Retrieve all supported values?" HorizontalAlignment="Left" Margin="391,22,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="True" Name="RetrieveAllValuesCheckBox" Content="Retrieve all supported values?" HorizontalAlignment="Left" Margin="391,22,0,0" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="391,45,0,0" TextWrapping="Wrap" Text="If you have disabled the above checkbox, you must select what values you want to retrieve:" VerticalAlignment="Top" Width="254" Height="33"/>
         <CheckBox Name="EnableHeightCheckBox" Content="Height" HorizontalAlignment="Left" Margin="391,83,0,0" VerticalAlignment="Top"/>
         <CheckBox Name="EnableSpeedCheckBox" Content="Speed" HorizontalAlignment="Left" Margin="391,104,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Test data" HorizontalAlignment="Left" Margin="391,141,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="EnableTestDataCheckBox" Content="Test data" HorizontalAlignment="Left" Margin="391,180,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="391,143,0,0" TextWrapping="Wrap" Text="If you have not started war thunder, you can use the test data for debugging" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

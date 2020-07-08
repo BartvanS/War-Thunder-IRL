@@ -97,6 +97,7 @@
     <Compile Include="classes\connection\IConnector.cs" />
     <Compile Include="classes\connection\SerialConnector.cs" />
     <Compile Include="classes\exceptions\ProtocolException.cs" />
+    <Compile Include="classes\VehicleSettings.cs" />
     <Compile Include="classes\vehicles\Plane.cs" />
     <Compile Include="classes\vehicles\Vehicle.cs" />
     <Compile Include="forms\Menu.xaml.cs">
@@ -123,6 +124,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="exampleIndicators.json" />
+    <None Include="exampleState.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -143,9 +146,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="logs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

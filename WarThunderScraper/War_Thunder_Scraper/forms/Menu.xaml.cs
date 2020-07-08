@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using War_Thunder_Scraper.classes;
 using War_Thunder_Scraper.classes.connection;
 using War_Thunder_Scraper.classes.exceptions;
 using WarThunderScraper.classes;
 using WarThunderScraper.classes.connection;
+using WarThunderScraper.Properties;
 
 
 namespace WarThunderScraper
@@ -34,7 +38,7 @@ namespace WarThunderScraper
             VehicleTypeSelectBox.SelectedIndex = 0;
         }
 
-        private void handleFetching()
+        private void handleFetching(bool fetchAllData, VehicleSettings vehicleSettings)
         {
             if (!_connection.Connected)
             {
@@ -42,18 +46,9 @@ namespace WarThunderScraper
                 return;
             }
 
-            string SelectedVehicleString = VehicleTypeSelectBox.SelectedItem.ToString();
             try
             {
-                bool parseSuccess = Enum.TryParse(SelectedVehicleString, out ArduinoActions.VehicleType vehicleType);
-                if (parseSuccess)
-                {
-                    arduinoActions.StartActions(_connection, vehicleType);
-                }
-                else
-                {
-                    MessageBox.Show("No valid type of vehicle is selected");
-                }
+                arduinoActions.StartActions(_connection, vehicleSettings.VehicleType);
             }
             catch (ObjectDisposedException exception)
             {
@@ -96,7 +91,22 @@ namespace WarThunderScraper
         private void ConnectPort_Click(object sender, RoutedEventArgs e)
         {
             InitializePort();
-            handleFetching();
+            string selectedVehicleString = VehicleTypeSelectBox.SelectedItem.ToString();
+            bool parseSuccess = Enum.TryParse(selectedVehicleString, out ArduinoActions.VehicleType vehicleType);
+            if (parseSuccess)
+            {
+                //todo: vehicleSettings
+                VehicleSettings vehicleSettings = new VehicleSettings();
+                vehicleSettings.RetrieveHeight = false;
+                vehicleSettings.RetrieveSpeed = false;
+                vehicleSettings.UseTestData = false;
+                vehicleSettings.VehicleType = vehicleType;
+                handleFetching(true, vehicleSettings);
+                }
+            else
+            {
+                MessageBox.Show("No valid type of vehicle is selected");
+            }
         }
 
         /// <summary>

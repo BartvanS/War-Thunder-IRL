@@ -16,7 +16,7 @@ namespace WT_T
         public void TestSerialConnectorWrite()
         {
             IConnector serialConnector = new SerialConnector();
-            Assert.AreEqual(false, serialConnector.Write("test"));
+            Assert.AreEqual(false, serialConnector.Write("speed", "200"));
         }
 
         [TestMethod]

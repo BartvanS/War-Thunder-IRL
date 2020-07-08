@@ -10,12 +10,6 @@ namespace War_Thunder_Scraper.classes
     public class VehicleSettings
     {
         /// <summary>
-        /// Retrieves all data available and sends it to the arduino. This is default
-        /// </summary>
-        // public bool retrieveAllData = true;
-
-
-        /// <summary>
         /// If you want te select what data to use, you can manually select it.
         /// </summary>
 
@@ -29,12 +23,5 @@ namespace War_Thunder_Scraper.classes
         public VehicleSettings()
         {
         }
-        // public void SetVehicleSettings(bool retrieveSpeed, bool retrieveHeight, bool useTestData, ArduinoActions.VehicleType vehicleType)
-        // {
-        //     RetrieveSpeed = retrieveSpeed;
-        //     RetrieveHeight = retrieveHeight;
-        //     UseTestData = useTestData;
-        //     VehicleType = vehicleType;
-        // }
     }
 }

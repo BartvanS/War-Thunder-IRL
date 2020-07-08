@@ -56,6 +56,11 @@ Start a flight and start the application
 
 **TADA!**
 
+# Roadmap (So far)
+- finishing Unit testing
+- Negging the devs to improve the api
+- Improve UI 
+- Refactor code 
 # Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

@@ -8,7 +8,7 @@ https://www.reddit.com/r/Warthunder/comments/hqg5t7/wip_bringing_warthunder_to_l
  - Arduino uno 
     - Other arduino compatable boards will probably work too, may need some tinkering in the code for using the correct pins.
  - Jumper wires
- - stepper(s)
+ - stepper(s). I used the 28byj-48 as they are very cheap and are used in the 3d print.
  - For more then 1 stepper, you need an external powersupply
  
  ## Mentality

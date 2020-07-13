@@ -1,6 +1,8 @@
 # War-Thunder-IRL
 This program retrieves data from your war thunder client and displays them physically in real life!
 
+## Demo
+https://www.reddit.com/r/Warthunder/comments/hqg5t7/wip_bringing_warthunder_to_life_sorry_for_potato/
 # Prerequisites
 ## Hardware
  - Arduino uno 

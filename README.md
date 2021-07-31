@@ -1,4 +1,7 @@
 # War-Thunder-IRL
+
+## To stop my crippling war thunder addiction, I decided to delete War Thunder. This means this project is not under development anymore!
+
 This program retrieves data from your war thunder client and displays them physically in real life!
 
 ## Demo

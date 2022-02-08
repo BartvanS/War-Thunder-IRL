@@ -13,6 +13,7 @@ https://www.reddit.com/r/Warthunder/comments/hqg5t7/wip_bringing_warthunder_to_l
  - Jumper wires
  - stepper(s). I used the 28byj-48 as they are very cheap and are used in the 3d print.
  - For more then 1 stepper, you need an external powersupply
+ - I used [this](https://www.thingiverse.com/thing:3745020) 3d print as gauge
  
  ## Mentality
   - This is my first open source project, so please be kind. 😊
